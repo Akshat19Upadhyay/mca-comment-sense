@@ -65,50 +65,66 @@ const SentimentDashboard = ({ results }: SentimentDashboardProps) => {
   return (
     <div className="space-y-6">
       {/* Overview Cards */}
-      <div className="grid gap-4 md:grid-cols-4">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Comments</CardTitle>
-            <MessageSquare className="h-4 w-4 text-muted-foreground" />
+      <div className="grid gap-6 md:grid-cols-4">
+        <Card className="bg-gradient-card shadow-medium hover:shadow-large transition-all duration-300 border-0 overflow-hidden relative">
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent"></div>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3 relative z-10">
+            <CardTitle className="text-base font-semibold">Total Comments</CardTitle>
+            <div className="p-2 bg-primary/10 rounded-lg">
+              <MessageSquare className="h-6 w-6 text-primary" />
+            </div>
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{totalComments}</div>
+          <CardContent className="relative z-10">
+            <div className="text-3xl font-bold text-primary">{totalComments}</div>
+            <p className="text-sm text-muted-foreground mt-1">Comments analyzed</p>
           </CardContent>
         </Card>
         
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Positive</CardTitle>
-            <TrendingUp className="h-4 w-4 text-success" />
+        <Card className="bg-gradient-card shadow-medium hover:shadow-large transition-all duration-300 border-0 overflow-hidden relative">
+          <div className="absolute inset-0 bg-gradient-to-br from-success/5 to-transparent"></div>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3 relative z-10">
+            <CardTitle className="text-base font-semibold">Positive</CardTitle>
+            <div className="p-2 bg-success/10 rounded-lg">
+              <TrendingUp className="h-6 w-6 text-success" />
+            </div>
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-success">{sentimentCounts.positive}</div>
-            <p className="text-xs text-muted-foreground">
+          <CardContent className="relative z-10">
+            <div className="text-3xl font-bold text-success">{sentimentCounts.positive}</div>
+            <p className="text-sm text-muted-foreground mt-1">
               {totalComments > 0 ? Math.round((sentimentCounts.positive / totalComments) * 100) : 0}% of total
             </p>
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Negative</CardTitle>
-            <TrendingDown className="h-4 w-4 text-destructive" />
+        <Card className="bg-gradient-card shadow-medium hover:shadow-large transition-all duration-300 border-0 overflow-hidden relative">
+          <div className="absolute inset-0 bg-gradient-to-br from-destructive/5 to-transparent"></div>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3 relative z-10">
+            <CardTitle className="text-base font-semibold">Negative</CardTitle>
+            <div className="p-2 bg-destructive/10 rounded-lg">
+              <TrendingDown className="h-6 w-6 text-destructive" />
+            </div>
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-destructive">{sentimentCounts.negative}</div>
-            <p className="text-xs text-muted-foreground">
+          <CardContent className="relative z-10">
+            <div className="text-3xl font-bold text-destructive">{sentimentCounts.negative}</div>
+            <p className="text-sm text-muted-foreground mt-1">
               {totalComments > 0 ? Math.round((sentimentCounts.negative / totalComments) * 100) : 0}% of total
             </p>
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Overall Sentiment</CardTitle>
-            {getSentimentIcon(overallSentiment)}
+        <Card className="bg-gradient-card shadow-medium hover:shadow-large transition-all duration-300 border-0 overflow-hidden relative">
+          <div className="absolute inset-0 bg-gradient-to-br from-neutral/5 to-transparent"></div>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3 relative z-10">
+            <CardTitle className="text-base font-semibold">Overall Sentiment</CardTitle>
+            <div className="p-2 bg-neutral/10 rounded-lg">
+              {getSentimentIcon(overallSentiment)}
+            </div>
           </CardHeader>
-          <CardContent>
-            <Badge variant={getSentimentBadgeVariant(overallSentiment)} className="capitalize">
+          <CardContent className="relative z-10">
+            <Badge 
+              variant={getSentimentBadgeVariant(overallSentiment)} 
+              className="capitalize text-base px-4 py-2 font-semibold shadow-soft"
+            >
               {overallSentiment}
             </Badge>
           </CardContent>
@@ -116,14 +132,19 @@ const SentimentDashboard = ({ results }: SentimentDashboardProps) => {
       </div>
 
       {/* Charts */}
-      <div className="grid gap-6 md:grid-cols-2">
-        <Card>
-          <CardHeader>
-            <CardTitle>Sentiment Distribution</CardTitle>
-            <CardDescription>Breakdown of comment sentiments</CardDescription>
+      <div className="grid gap-8 md:grid-cols-2">
+        <Card className="bg-gradient-card shadow-large border-0 overflow-hidden">
+          <CardHeader className="bg-gradient-to-r from-primary/5 to-accent/5">
+            <CardTitle className="text-xl font-bold flex items-center space-x-2">
+              <div className="w-3 h-3 bg-primary rounded-full"></div>
+              <span>Sentiment Distribution</span>
+            </CardTitle>
+            <CardDescription className="text-base">
+              Visual breakdown of comment sentiments across all submissions
+            </CardDescription>
           </CardHeader>
-          <CardContent>
-            <div className="h-[300px]">
+          <CardContent className="p-6">
+            <div className="h-[350px] bg-gradient-to-br from-muted/20 to-transparent rounded-xl p-4">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie
@@ -132,35 +153,61 @@ const SentimentDashboard = ({ results }: SentimentDashboardProps) => {
                     cy="50%"
                     labelLine={false}
                     label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-                    outerRadius={80}
+                    outerRadius={100}
+                    innerRadius={40}
                     fill="#8884d8"
                     dataKey="value"
+                    strokeWidth={2}
                   >
                     {pieData.map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={entry.color} />
                     ))}
                   </Pie>
-                  <Tooltip />
+                  <Tooltip 
+                    contentStyle={{ 
+                      backgroundColor: 'hsl(var(--card))', 
+                      border: 'none', 
+                      borderRadius: '8px',
+                      boxShadow: '0 4px 16px -4px hsl(var(--primary) / 0.15)' 
+                    }} 
+                  />
                 </PieChart>
               </ResponsiveContainer>
             </div>
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Sentiment Counts</CardTitle>
-            <CardDescription>Number of comments by sentiment</CardDescription>
+        <Card className="bg-gradient-card shadow-large border-0 overflow-hidden">
+          <CardHeader className="bg-gradient-to-r from-accent/5 to-primary/5">
+            <CardTitle className="text-xl font-bold flex items-center space-x-2">
+              <div className="w-3 h-3 bg-accent rounded-full"></div>
+              <span>Sentiment Counts</span>
+            </CardTitle>
+            <CardDescription className="text-base">
+              Quantitative analysis of sentiment distribution
+            </CardDescription>
           </CardHeader>
-          <CardContent>
-            <div className="h-[300px]">
+          <CardContent className="p-6">
+            <div className="h-[350px] bg-gradient-to-br from-muted/20 to-transparent rounded-xl p-4">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={barData}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="sentiment" />
-                  <YAxis />
-                  <Tooltip />
-                  <Bar dataKey="count" radius={[4, 4, 0, 0]} />
+                  <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--muted-foreground) / 0.2)" />
+                  <XAxis 
+                    dataKey="sentiment" 
+                    tick={{ fontSize: 12, fill: 'hsl(var(--muted-foreground))' }}
+                  />
+                  <YAxis 
+                    tick={{ fontSize: 12, fill: 'hsl(var(--muted-foreground))' }}
+                  />
+                  <Tooltip 
+                    contentStyle={{ 
+                      backgroundColor: 'hsl(var(--card))', 
+                      border: 'none', 
+                      borderRadius: '8px',
+                      boxShadow: '0 4px 16px -4px hsl(var(--primary) / 0.15)' 
+                    }} 
+                  />
+                  <Bar dataKey="count" radius={[6, 6, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -169,40 +216,68 @@ const SentimentDashboard = ({ results }: SentimentDashboardProps) => {
       </div>
 
       {/* Individual Results */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center space-x-2">
-            <FileText className="h-5 w-5" />
+      <Card className="bg-gradient-card shadow-large border-0 overflow-hidden">
+        <CardHeader className="bg-gradient-to-r from-primary/5 to-accent/5">
+          <CardTitle className="flex items-center space-x-3 text-2xl">
+            <div className="p-2 bg-primary/10 rounded-lg">
+              <FileText className="h-7 w-7 text-primary" />
+            </div>
             <span>Individual Comment Analysis</span>
           </CardTitle>
-          <CardDescription>Detailed sentiment analysis for each comment</CardDescription>
+          <CardDescription className="text-base">
+            Detailed sentiment analysis with AI-generated summaries for each comment
+          </CardDescription>
         </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            {results.map((result) => (
-              <div key={result.id} className="border rounded-lg p-4 space-y-3">
+        <CardContent className="p-6">
+          <div className="space-y-6">
+            {results.map((result, index) => (
+              <div key={result.id} className="bg-gradient-card border-0 rounded-xl p-6 space-y-4 shadow-medium hover:shadow-large transition-all duration-300">
                 <div className="flex items-center justify-between">
-                  <Badge variant={getSentimentBadgeVariant(result.sentiment)} className="capitalize">
+                  <Badge 
+                    variant={getSentimentBadgeVariant(result.sentiment)} 
+                    className="capitalize text-base px-4 py-2 font-semibold shadow-soft flex items-center space-x-2"
+                  >
                     {getSentimentIcon(result.sentiment)}
-                    <span className="ml-1">{result.sentiment}</span>
+                    <span>{result.sentiment}</span>
                   </Badge>
-                  <div className="text-sm text-muted-foreground">
-                    Confidence: {Math.round(result.confidence * 100)}%
+                  <div className="flex items-center space-x-2 bg-muted/50 px-3 py-2 rounded-lg">
+                    <div className="text-sm font-medium">Confidence:</div>
+                    <div className="text-sm font-bold text-primary">
+                      {Math.round(result.confidence * 100)}%
+                    </div>
                   </div>
                 </div>
-                <Progress value={result.confidence * 100} className="h-2" />
-                <div className="space-y-2">
-                  <div>
-                    <h4 className="text-sm font-medium mb-1">Original Comment:</h4>
-                    <p className="text-sm text-muted-foreground bg-muted p-2 rounded">
-                      {result.comment}
-                    </p>
+                
+                <div className="relative">
+                  <Progress 
+                    value={result.confidence * 100} 
+                    className="h-3 bg-muted/50" 
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent to-primary/20 rounded-full"></div>
+                </div>
+                
+                <div className="grid gap-4 md:grid-cols-2">
+                  <div className="space-y-2">
+                    <h4 className="text-base font-semibold flex items-center space-x-2">
+                      <div className="w-2 h-2 bg-primary rounded-full"></div>
+                      <span>Original Comment</span>
+                    </h4>
+                    <div className="bg-muted/50 p-4 rounded-xl border-l-4 border-primary/30">
+                      <p className="text-sm leading-relaxed">
+                        {result.comment}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="text-sm font-medium mb-1">AI Summary:</h4>
-                    <p className="text-sm bg-primary/5 p-2 rounded">
-                      {result.summary}
-                    </p>
+                  <div className="space-y-2">
+                    <h4 className="text-base font-semibold flex items-center space-x-2">
+                      <div className="w-2 h-2 bg-accent rounded-full"></div>
+                      <span>AI Summary</span>
+                    </h4>
+                    <div className="bg-gradient-to-br from-primary/5 to-accent/5 p-4 rounded-xl border-l-4 border-accent/30">
+                      <p className="text-sm leading-relaxed font-medium">
+                        {result.summary}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
