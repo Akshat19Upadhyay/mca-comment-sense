@@ -93,32 +93,35 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-br from-background to-muted/30">
       <Header />
       
-      <main className="container mx-auto px-6 py-8 space-y-8">
+      <main className="container mx-auto px-6 py-12 space-y-12">
         {/* Welcome Section */}
-        <Card className="bg-gradient-to-r from-primary/5 to-accent/5 border-primary/20">
-          <CardHeader>
-            <CardTitle className="text-2xl">e-Consultation Sentiment Analysis Platform</CardTitle>
-            <CardDescription className="text-lg">
+        <Card className="bg-gradient-card shadow-large border-0 overflow-hidden relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-transparent to-accent/10"></div>
+          <CardHeader className="relative z-10 pb-6">
+            <CardTitle className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              e-Consultation Sentiment Analysis Platform
+            </CardTitle>
+            <CardDescription className="text-lg text-foreground/80 leading-relaxed">
               AI-powered analysis tool for stakeholder comments on draft legislation. 
-              Get comprehensive sentiment analysis, automated summaries, and keyword insights.
+              Get comprehensive sentiment analysis, automated summaries, and keyword insights to enhance decision-making.
             </CardDescription>
           </CardHeader>
-          <CardContent>
-            <div className="grid gap-4 md:grid-cols-3 text-sm">
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-success rounded-full"></div>
-                <span>Sentiment Classification</span>
+          <CardContent className="relative z-10">
+            <div className="grid gap-6 md:grid-cols-3 text-base">
+              <div className="flex items-center space-x-3 p-4 bg-success/10 rounded-xl">
+                <div className="w-3 h-3 bg-success rounded-full shadow-glow"></div>
+                <span className="font-medium">Sentiment Classification</span>
               </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-primary rounded-full"></div>
-                <span>Automated Summaries</span>
+              <div className="flex items-center space-x-3 p-4 bg-primary/10 rounded-xl">
+                <div className="w-3 h-3 bg-primary rounded-full shadow-glow"></div>
+                <span className="font-medium">Automated Summaries</span>
               </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-accent rounded-full"></div>
-                <span>Keyword Analysis</span>
+              <div className="flex items-center space-x-3 p-4 bg-accent/10 rounded-xl">
+                <div className="w-3 h-3 bg-accent rounded-full shadow-glow"></div>
+                <span className="font-medium">Keyword Analysis</span>
               </div>
             </div>
           </CardContent>
@@ -126,30 +129,34 @@ const Index = () => {
 
         {/* Input Section */}
         {!showResults && (
-          <div>
-            <h2 className="text-xl font-semibold mb-4">Submit Comments for Analysis</h2>
+          <div className="space-y-6">
+            <div className="text-center space-y-2">
+              <h2 className="text-2xl font-bold">Submit Comments for Analysis</h2>
+              <p className="text-muted-foreground">Choose your preferred method to analyze stakeholder feedback</p>
+            </div>
             <CommentInput onAnalyze={handleAnalyze} />
           </div>
         )}
 
         {/* Results Section */}
         {showResults && (
-          <div className="space-y-6">
-            <div className="flex items-center justify-between">
-              <h2 className="text-xl font-semibold">Analysis Results</h2>
-              <div className="flex space-x-2">
-                <Button onClick={handleExport} variant="outline" size="sm">
-                  <Download className="h-4 w-4 mr-2" />
+          <div className="space-y-8">
+            <div className="flex items-center justify-between bg-gradient-card p-6 rounded-xl shadow-medium">
+              <div>
+                <h2 className="text-2xl font-bold">Analysis Results</h2>
+                <p className="text-muted-foreground mt-1">Comprehensive insights from {results.length} comments</p>
+              </div>
+              <div className="flex space-x-3">
+                <Button onClick={handleExport} variant="outline" size="lg" className="shadow-medium hover:shadow-large transition-all">
+                  <Download className="h-5 w-5 mr-2" />
                   Export Results
                 </Button>
-                <Button onClick={handleReset} variant="outline" size="sm">
-                  <RefreshCw className="h-4 w-4 mr-2" />
+                <Button onClick={handleReset} variant="outline" size="lg" className="shadow-medium hover:shadow-large transition-all">
+                  <RefreshCw className="h-5 w-5 mr-2" />
                   New Analysis
                 </Button>
               </div>
             </div>
-            
-            <Separator />
             
             <SentimentDashboard results={results} />
             
@@ -158,11 +165,12 @@ const Index = () => {
         )}
 
         {/* Footer */}
-        <Card className="bg-muted/30">
-          <CardContent className="pt-6">
-            <div className="text-center text-sm text-muted-foreground">
-              <p>Ministry of Corporate Affairs - e-Consultation Analytics Platform</p>
-              <p>Powered by AI-driven sentiment analysis and natural language processing</p>
+        <Card className="bg-gradient-to-r from-muted/50 to-muted/30 border-0 shadow-soft">
+          <CardContent className="pt-8 pb-8">
+            <div className="text-center space-y-2">
+              <p className="font-semibold text-lg">Ministry of Corporate Affairs</p>
+              <p className="text-muted-foreground">e-Consultation Analytics Platform</p>
+              <p className="text-sm text-muted-foreground">Powered by AI-driven sentiment analysis and natural language processing</p>
             </div>
           </CardContent>
         </Card>

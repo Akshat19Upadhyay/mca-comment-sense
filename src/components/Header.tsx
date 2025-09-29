@@ -2,26 +2,29 @@ import { FileText, BarChart3, MessageSquare } from "lucide-react";
 
 const Header = () => {
   return (
-    <header className="bg-gradient-to-r from-primary to-primary/90 text-primary-foreground shadow-soft">
-      <div className="container mx-auto px-6 py-4">
+    <header className="bg-gradient-hero shadow-glow relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 backdrop-blur-sm"></div>
+      <div className="container mx-auto px-6 py-8 relative z-10">
         <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-2">
-              <FileText className="h-8 w-8" />
-              <div>
-                <h1 className="text-xl font-bold">e-Consultation Analytics</h1>
-                <p className="text-sm text-primary-foreground/80">Ministry of Corporate Affairs</p>
+          <div className="flex items-center space-x-6">
+            <div className="flex items-center space-x-3">
+              <div className="p-3 bg-white/10 backdrop-blur-sm rounded-xl shadow-medium">
+                <FileText className="h-10 w-10 text-white" />
+              </div>
+              <div className="text-white">
+                <h1 className="text-3xl font-bold tracking-tight">e-Consultation Analytics</h1>
+                <p className="text-lg text-white/90 font-medium">Ministry of Corporate Affairs</p>
               </div>
             </div>
           </div>
-          <div className="flex items-center space-x-6">
-            <div className="flex items-center space-x-2 text-sm">
-              <MessageSquare className="h-4 w-4" />
-              <span>Sentiment Analysis</span>
+          <div className="flex items-center space-x-8">
+            <div className="flex items-center space-x-3 text-white/90 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg">
+              <MessageSquare className="h-5 w-5" />
+              <span className="font-medium">Sentiment Analysis</span>
             </div>
-            <div className="flex items-center space-x-2 text-sm">
-              <BarChart3 className="h-4 w-4" />
-              <span>Analytics Dashboard</span>
+            <div className="flex items-center space-x-3 text-white/90 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg">
+              <BarChart3 className="h-5 w-5" />
+              <span className="font-medium">Analytics Dashboard</span>
             </div>
           </div>
         </div>

@@ -53,28 +53,31 @@ const WordCloud = ({ comments }: WordCloudProps) => {
   });
 
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle className="flex items-center space-x-2">
-          <Cloud className="h-5 w-5" />
+    <Card className="bg-gradient-card shadow-large border-0 overflow-hidden">
+      <CardHeader className="bg-gradient-to-r from-primary/5 to-accent/5">
+        <CardTitle className="flex items-center space-x-3 text-2xl">
+          <div className="p-2 bg-primary/10 rounded-lg">
+            <Cloud className="h-7 w-7 text-primary" />
+          </div>
           <span>Word Cloud</span>
         </CardTitle>
-        <CardDescription>
-          Most frequently used words across all comments
+        <CardDescription className="text-base">
+          Most frequently used words across all comments with visual density mapping
         </CardDescription>
       </CardHeader>
-      <CardContent>
-        <div className="relative h-96 border rounded-lg overflow-hidden bg-gradient-to-br from-muted/30 to-muted/10">
+      <CardContent className="p-6">
+        <div className="relative h-96 border-2 border-primary/20 rounded-xl overflow-hidden bg-gradient-to-br from-muted/20 via-primary/5 to-accent/10 shadow-medium">
           {wordFreq.map((item, index) => (
             <div
               key={item.word}
-              className="absolute font-semibold cursor-pointer hover:opacity-80 transition-opacity select-none"
+              className="absolute font-bold cursor-pointer hover:opacity-80 hover:scale-110 transition-all duration-200 select-none"
               style={{
                 fontSize: `${getFontSize(item.count)}px`,
                 color: getRandomColor(),
                 ...getRandomPosition(),
                 transform: 'translate(-50%, -50%)',
-                animation: `fadeIn 0.5s ease-in-out ${index * 0.1}s both`,
+                animation: `fadeIn 0.6s ease-in-out ${index * 0.1}s both`,
+                textShadow: '2px 2px 4px rgba(0,0,0,0.1)',
               }}
               title={`"${item.word}" appears ${item.count} times`}
             >
@@ -83,16 +86,18 @@ const WordCloud = ({ comments }: WordCloudProps) => {
           ))}
         </div>
         
-        <div className="mt-4">
-          <h4 className="flex items-center space-x-2 text-sm font-medium mb-2">
-            <Hash className="h-4 w-4" />
+        <div className="mt-6 p-4 bg-gradient-to-r from-primary/5 to-accent/5 rounded-xl">
+          <h4 className="flex items-center space-x-2 text-lg font-semibold mb-3">
+            <div className="p-1 bg-primary/10 rounded">
+              <Hash className="h-5 w-5 text-primary" />
+            </div>
             <span>Top Keywords</span>
           </h4>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-3">
             {wordFreq.slice(0, 10).map((item) => (
               <div
                 key={item.word}
-                className="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full border"
+                className="px-4 py-2 bg-primary/15 text-primary text-sm font-medium rounded-full border border-primary/30 hover:bg-primary/25 transition-colors shadow-soft"
               >
                 {item.word} ({item.count})
               </div>
@@ -106,11 +111,11 @@ const WordCloud = ({ comments }: WordCloudProps) => {
           @keyframes fadeIn {
             from {
               opacity: 0;
-              transform: translate(-50%, -50%) scale(0.8);
+              transform: translate(-50%, -50%) scale(0.8) rotate(-10deg);
             }
             to {
               opacity: 1;
-              transform: translate(-50%, -50%) scale(1);
+              transform: translate(-50%, -50%) scale(1) rotate(0deg);
             }
           }
         `}
